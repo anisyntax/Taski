@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import { login } from '../api'
+import { register } from '../api'
 
-export default function Login() {
-  const [form, setForm] = useState({ email: '', password: '' })
+export default function Register() {
+  const [form, setForm] = useState({ name: '', email: '', password: '' })
   const [error, setError] = useState('')
   const nav = useNavigate()
   
@@ -12,11 +12,11 @@ export default function Login() {
   const submit = async e => {
     e.preventDefault()
     try {
-      const { data } = await login(form)
+      const { data } = await register(form)
       localStorage.setItem('token', data.token)
       nav('/')
     } catch (err) {
-      setError(err.response?.data?.error || 'Wrong email or password')
+      setError(err.response?.data?.error || 'Could not register. Please try again.')
     }
   }
 
@@ -34,13 +34,23 @@ export default function Login() {
       </div>
 
       <div className="bg-white p-8 rounded-2xl shadow w-full max-w-md">
-        <h1 className="text-2xl font-bold text-gray-800 mb-6">Welcome back</h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-6">Create an account</h1>
         {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+        
         <form onSubmit={submit} className="space-y-4">
+          <input 
+            name="name" 
+            placeholder="Full Name" 
+            type="text"
+            required
+            onChange={handle}
+            className="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          />
           <input 
             name="email" 
             placeholder="Email" 
             type="email"
+            required
             onChange={handle}
             className="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
@@ -48,18 +58,19 @@ export default function Login() {
             name="password" 
             placeholder="Password" 
             type="password"
+            required
             onChange={handle}
             className="w-full border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
           <button 
             className="w-full bg-indigo-600 text-white py-2 rounded-lg font-medium hover:bg-indigo-700"
           >
-            Log in
+            Sign up
           </button>
         </form>
         <p className="text-sm text-gray-500 mt-4 text-center">
-          No account?{' '}
-          <Link to="/register" className="text-indigo-600">Sign up</Link>
+          Already have an account?{' '}
+          <Link to="/login" className="text-indigo-600 font-medium">Log in</Link>
         </p>
       </div>
     </div>

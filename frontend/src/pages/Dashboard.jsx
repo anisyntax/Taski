@@ -37,7 +37,14 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white border-b px-6 py-4 flex justify-between items-center">
-        <h1 className="text-lg font-bold text-indigo-600">TaskFlow</h1>
+        <div className="flex items-center gap-2">
+          <div className="bg-indigo-600 p-1.5 rounded-lg">
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <h1 className="text-xl font-black text-indigo-900 tracking-tight">Taski</h1>
+        </div>
         <button 
           onClick={() => { localStorage.removeItem('token'); nav('/login') }}
           className="text-sm text-gray-400 hover:text-red-500">

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './pages/Login'
+import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 
 // A simple wrapper to protect the dashboard
@@ -14,8 +15,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-        {/* We'll redirect /register to login temporarily until you build the Register.jsx page */}
-        <Route path="/register" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         
         {/* The main dashboard route is protected */}
         <Route 
