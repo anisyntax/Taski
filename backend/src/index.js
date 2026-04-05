@@ -2,9 +2,7 @@ const express = require('express')
 const cors = require('cors')
 require('dotenv').config()
 const app = express()
-app.use(cors({
-  origin: ['http://localhost:5173', 'https://YOUR-APP.vercel.app']
-}))
+app.use(cors()) // Allow all domains so Vercel can connect seamlessly
 app.use(express.json())
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/projects', require('./routes/projects'))
